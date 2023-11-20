@@ -15,5 +15,17 @@ const initialState = {
 export const tasks = createSlice({
   name: "tasks",
   initialState,
-  reducers: {},
+  reducers: {
+    removeTask: (state, action) => {
+      console.log("task deleted")
+      state.todos = state.todos.filter((task) => task.id !== action.payload.id )
+    }
+    
+  },
 });
+
+
+export const {
+removeTask
+} = tasks.actions;
+export default tasks.reducer;
