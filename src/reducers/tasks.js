@@ -18,6 +18,11 @@ export const tasks = createSlice({
   name: "tasks",
   initialState,
   reducers: {
+    removeTask: (state, action) => {
+      console.log("task deleted");
+      state.todos = state.todos.filter((task) => task.id !== action.payload.id);
+    },
+
     // Toggle the completion status of a todo
     toggleTodo: (state, action) => {
       const todoToUpdate = state.todos.find(
@@ -35,4 +40,5 @@ export const tasks = createSlice({
   },
 });
 
-export const { toggleTodo } = tasks.actions;
+export const { removeTask, toggleTodo } = tasks.actions;
+export default tasks.reducer;

@@ -1,9 +1,6 @@
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTodo } from "../../reducers/tasks";
-import styled from "styled-components";
-
-const StyledCheckbox = styled.input``;
+import RemoveTask from "../RemoveTask/RemoveTask";
 
 const Todos = () => {
   const todoList = useSelector((state) => state.tasks.todos);
@@ -20,25 +17,25 @@ const Todos = () => {
       <h1>Todos</h1>
       <p>{totalTasks} tasks</p>
       <p>{uncompletedTasks} uncompleted tasks</p>
-
-      {todoList.map((todo) => (
-        <div key={todo.id}>
+      {todoList.map((list) => (
+        <div key={list.id}>
           <ul>
             <li>
-              <StyledCheckbox
+              <input
                 type="checkbox"
-                checked={todo.complete}
-                onChange={() => handleToggle(todo.id)}
+                checked={list.complete}
+                onChange={() => handleToggle(list.id)}
               />
               <span
                 style={{
-                  textDecoration: todo.complete ? "line-through" : "none",
+                  textDecoration: list.complete ? "line-through" : "none",
                 }}
               >
-                {todo.text}
+                {list.text}
               </span>
             </li>
           </ul>
+          <RemoveTask id={list.id} />
         </div>
       ))}
     </div>
