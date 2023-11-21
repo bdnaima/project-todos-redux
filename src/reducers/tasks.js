@@ -10,8 +10,6 @@ const todos = [
 
 const initialState = {
   todos,
-  totalTasks: todos.length,
-  uncompletedTasks: todos.filter((todo) => !todo.complete).length,
 };
 
 export const tasks = createSlice({
@@ -20,54 +18,37 @@ export const tasks = createSlice({
   reducers: {
     addTodo: (state, action) => {
       const newTodo = {
-        id: state.todos.length += 1,
+        id: (state.todos.length += 1),
         text: action.payload,
         complete: false,
       };
-      state.todos.push(newTodo)
+      state.todos.push(newTodo);
     },
     removeTask: (state, action) => {
       console.log("task deleted");
       state.todos = state.todos.filter((task) => task.id !== action.payload.id);
-
-      if (removeTask) {
-        state.totalTasks--;
-        if (!removeTask.complete) {
-          state.uncompletedTasks--;
-        }
-      }
+      console.log("Updated todos:", state.todos);
     },
 
-    // Toggle the completion state of a todo
-    toggleTodo: (state, action) => {
-      const todoToUpdate = state.todos.find(
-        (todo) => todo.id === action.payload
-      );
-      if (todoToUpdate) {
-        todoToUpdate.complete = !todoToUpdate.complete;
-        if (todoToUpdate.complete) {
-          state.uncompletedTasks--;
-        } else {
-          state.uncompletedTasks++;
-        }
-      }
-    },
     completedAll: (state) => {
-      console.log("completedAll Task")
-      state.todos = state.todos.map((task) => ({...task, complete: true}));
-    
+      console.log("completedAll Task");
+      state.todos = state.todos.map((task) => ({ ...task, complete: true }));
     },
     uncompletedAll: (state) => {
-      console.log("uncompletedAll Task")
-      state.todos = state.todos.map((task) => ({...task, complete: false}));
-    
-    }
+      console.log("uncompletedAll Task");
+      state.todos = state.todos.map((task) => ({ ...task, complete: false }));
+    },
 
+    toggleTodo: (state, action) => {
+      const task = state.todos.find((todo) => todo.id === action.payload.id);
+
+      if (task) {
+        task.complete = !task.complete;
+      }
+    },
   },
 });
 
- 
-
-export const { removeTask, toggleTodo,  completedAll, uncompletedAll } = tasks.actions;
+export const { removeTask, toggleTodo, completedAll, uncompletedAll } =
+  tasks.actions;
 export default tasks.reducer;
-
