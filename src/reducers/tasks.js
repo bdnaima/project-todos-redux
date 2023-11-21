@@ -24,5 +24,15 @@ export const tasks = createSlice({
       };
       state.todos.push(newTodo)
     }
+    removeTask: (state, action) => {
+      console.log("task deleted")
+      state.todos = state.todos.filter((task) => task.id !== action.payload.id )
+    }
   },
 });
+
+
+export const {
+removeTask
+} = tasks.actions;
+export default tasks.reducer;
