@@ -21,9 +21,16 @@ export const tasks = createSlice({
     removeTask: (state, action) => {
       console.log("task deleted");
       state.todos = state.todos.filter((task) => task.id !== action.payload.id);
+
+      if (removeTask) {
+        state.totalTasks--;
+        if (!removeTask.complete) {
+          state.uncompletedTasks--;
+        }
+      }
     },
 
-    // Toggle the completion status of a todo
+    // Toggle the completion state of a todo
     toggleTodo: (state, action) => {
       const todoToUpdate = state.todos.find(
         (todo) => todo.id === action.payload
