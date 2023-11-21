@@ -15,7 +15,7 @@ const Todos = () => {
   const dispatch = useDispatch();
 
   const handleToggleTodo = (id) => {
-    dispatch(toggleTodo(id));
+    dispatch(toggleTodo({ id }));
   };
 
   return (
