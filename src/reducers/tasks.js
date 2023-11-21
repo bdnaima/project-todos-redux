@@ -15,5 +15,14 @@ const initialState = {
 export const tasks = createSlice({
   name: "tasks",
   initialState,
-  reducers: {},
+  reducers: {
+    addTodo: (state, action) => {
+      const newTodo = {
+        id: state.todos.length += 1,
+        text: action.payload,
+        complete: false,
+      };
+      state.todos.push(newTodo)
+    }
+  },
 });
