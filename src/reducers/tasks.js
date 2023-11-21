@@ -55,5 +55,18 @@ export const tasks = createSlice({
   },
 });
 
-export const { removeTask, toggleTodo } = tasks.actions;
+  completedAll: (state) => {
+      console.log("completedAll Task")
+      state.todos = state.todos.map((task) => ({...task, complete: true}));
+    
+    },
+    uncompletedAll: (state) => {
+      console.log("uncompletedAll Task")
+      state.todos = state.todos.map((task) => ({...task, complete: false}));
+    
+    }
+  },
+});
+export const { removeTask, toggleTodo,  completedAll, uncompletedAll } = tasks.actions;
 export default tasks.reducer;
+

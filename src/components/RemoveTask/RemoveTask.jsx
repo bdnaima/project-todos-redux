@@ -16,7 +16,7 @@ padding: 1%;
 }
 `;
 
-const RemoveTask = ({ id}) => {
+const RemoveTask = ({ id }) => {
     const dispatch = useDispatch();
     const deleteTask = ()=> {
         dispatch(removeTask({id}))

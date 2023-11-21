@@ -4,6 +4,7 @@ import { tasks } from "./reducers/tasks";
 import Todos from "./components/TodoList/Todos";
 import AddTodo from "./components/AddTodos";
 
+
 const reducer = combineReducers({
   tasks: tasks.reducer,
 });
