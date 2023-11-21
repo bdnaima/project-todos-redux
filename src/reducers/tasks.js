@@ -16,11 +16,18 @@ export const tasks = createSlice({
   name: "tasks",
   initialState,
   reducers: {
+    addTodo: (state, action) => {
+      const newTodo = {
+        id: state.todos.length += 1,
+        text: action.payload,
+        complete: false,
+      };
+      state.todos.push(newTodo)
+    }
     removeTask: (state, action) => {
       console.log("task deleted")
       state.todos = state.todos.filter((task) => task.id !== action.payload.id )
     }
-    
   },
 });
 
