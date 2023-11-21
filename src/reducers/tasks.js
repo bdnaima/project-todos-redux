@@ -52,10 +52,7 @@ export const tasks = createSlice({
         }
       }
     },
-  },
-});
-
-  completedAll: (state) => {
+    completedAll: (state) => {
       console.log("completedAll Task")
       state.todos = state.todos.map((task) => ({...task, complete: true}));
     
@@ -65,8 +62,12 @@ export const tasks = createSlice({
       state.todos = state.todos.map((task) => ({...task, complete: false}));
     
     }
+
   },
 });
+
+ 
+
 export const { removeTask, toggleTodo,  completedAll, uncompletedAll } = tasks.actions;
 export default tasks.reducer;
 
