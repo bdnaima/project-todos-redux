@@ -49,6 +49,12 @@ const Todos = () => {
                       checked={list.complete}
                       onChange={() => handleToggle(list.id)}
                     />
+                  {/* Display timestamp */}
+                  {list.createdAt && (
+                    <p className="timestamp">
+                      Added at: {list.createdAt}
+                    </p>
+                  )}
                     <span
                       style={{
                         textDecoration: list.complete ? "line-through" : "none",
