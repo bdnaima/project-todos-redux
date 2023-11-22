@@ -12,6 +12,7 @@ const initialState = {
   todos,
   totalTasks: todos.length,
   uncompletedTasks: todos.filter((todo) => !todo.complete).length,
+  dueDate: null
 };
 
 export const tasks = createSlice({
@@ -19,10 +20,12 @@ export const tasks = createSlice({
   initialState,
   reducers: {
     addTodo: (state, action) => {
+      const { text, dueDate } = action.payload
       const newTodo = {
         id: state.todos.length += 1,
-        text: action.payload,
+        text,
         complete: false,
+        dueDate,
       };
       state.todos.push(newTodo)
     },
@@ -61,13 +64,13 @@ export const tasks = createSlice({
       console.log("uncompletedAll Task")
       state.todos = state.todos.map((task) => ({...task, complete: false}));
     
-    }
+    },
 
   },
 });
 
  
 
-export const { removeTask, toggleTodo,  completedAll, uncompletedAll } = tasks.actions;
+export const { removeTask, toggleTodo,  completedAll, uncompletedAll, addTodo} = tasks.actions;
 export default tasks.reducer;
 
