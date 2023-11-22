@@ -8,16 +8,35 @@ const todos = [
     text: "Watch video on actions & reducers",
     complete: false,
     category: "Study",
+    checked: false,
   },
-  { id: 2, text: "Follow redux codealong", complete: false, category: "Study" },
-  { id: 3, text: "Fork weekly assignment", complete: false, category: "Work" },
-  { id: 4, text: "Create a todo app", complete: false, category: "Personal" },
+  {
+    id: 2,
+    text: "Follow redux codealong",
+    complete: false,
+    category: "Study",
+    checked: false,
+  },
+  {
+    id: 3,
+    text: "Fork weekly assignment",
+    complete: false,
+    category: "Work",
+    checked: false,
+  },
+  {
+    id: 4,
+    text: "Create a todo app",
+    complete: false,
+    category: "Personal",
+    checked: false,
+  },
 ];
 
 const initialState = {
   todos,
   totalTasks: todos.length,
-  dueDate: null
+  dueDate: null,
 };
 
 export const tasks = createSlice({
@@ -32,9 +51,9 @@ export const tasks = createSlice({
         text,
         category,
         complete: false,
+        checked: false,
         dueDate,
         createdAt: currentTime,
-
       };
       state.todos.push(newTodo);
       state.totalTasks++;
@@ -48,26 +67,22 @@ export const tasks = createSlice({
     toggleTodo: (state, action) => {
       const task = state.todos.find((todo) => todo.id === action.payload.id);
       if (task) {
-        task.complete = !task.complete;
+        task.checked = !task.checked;
       }
     },
     completedAll: (state) => {
-      console.log("completedAll Task")
+      console.log("completedAll Task");
       state.todos = state.todos.map((task) => ({ ...task, complete: true }));
-
     },
     uncompletedAll: (state) => {
-      console.log("uncompletedAll Task")
+      console.log("uncompletedAll Task");
 
       state.todos = state.todos.map((task) => ({ ...task, complete: false }));
-
-    }
-
-
+    },
   },
 });
 
-
-export const { removeTask, toggleTodo,  completedAll, uncompletedAll, addTodo} = tasks.actions;
+export const { removeTask, toggleTodo, completedAll, uncompletedAll, addTodo } =
+  tasks.actions;
 
 export default tasks.reducer;
