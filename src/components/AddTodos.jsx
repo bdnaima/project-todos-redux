@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { tasks } from "../reducers/tasks"
+import { addTodo } from "../reducers/tasks";
+import { format } from "date-fns";
 
 const AddTodo = () => {
     const dispatch = useDispatch();
     const [newTask, setNewTask] = useState("");
 
     const handleSubmitTodo = () => {
-        dispatch(tasks.actions.addTodo(newTask));
+        const currentTime = format(new Date(), "HH:mm dd/MM");
+        dispatch(addTodo({ text: newTask, createdAt: currentTime }));
         setNewTask("");
     }
 
