@@ -21,7 +21,7 @@ const Todos = () => {
     dispatch(toggleTodo(id));
     console.log("check please");
   };
- 
+
 
   return (
     <div>
@@ -37,9 +37,9 @@ const Todos = () => {
       ) : (
         <>
           {incompleteTasks.map((list) => {
-           const now = new Date();
-           const taskDueDate = list.dueDate ? new Date(list.dueDate) : null;
-           const isOverdue = taskDueDate && taskDueDate < now;
+            const now = new Date();
+            const taskDueDate = list.dueDate ? new Date(list.dueDate) : null;
+            const isOverdue = taskDueDate && taskDueDate < now;
             return (
               <section key={list.id}>
                 <ul>
@@ -49,20 +49,21 @@ const Todos = () => {
                       checked={list.complete}
                       onChange={() => handleToggle(list.id)}
                     />
-                  {/* Display timestamp */}
-                  {list.createdAt && (
-                    <p className="timestamp">
-                      Added at: {list.createdAt}
-                    </p>
-                  )}
+
                     <span
                       style={{
                         textDecoration: list.complete ? "line-through" : "none",
                         color: isOverdue ? "red" : "inherit",
                       }}
                     >
-                   {list.text} {list.dueDate && <span> {list.dueDate}</span>} 
+                      {list.text} {list.dueDate && <span> {list.dueDate}</span>}
                     </span>
+                    {/* Display timestamp */}
+                    {list.createdAt && (
+                      <p className="timestamp">
+                        Added at: {list.createdAt}
+                      </p>
+                    )}
                   </li>
                 </ul>
                 <RemoveTask id={list.id} />
