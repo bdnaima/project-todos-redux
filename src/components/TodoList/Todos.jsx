@@ -22,6 +22,7 @@ const getCategories = (todoList) => {
 const Todos = () => {
   const todoList = useSelector((state) => state.tasks.todos);
   const incompleteTasks = todoList.filter((task) => !task.complete);
+  const uncompletedTasks = useSelector((state) => state.tasks.uncompletedTasks);
   const totalTasks = useSelector((state) => state.tasks.totalTasks);
 
   const categories = getCategories(todoList);
@@ -47,7 +48,7 @@ const Todos = () => {
       <AddTodo />
       <CompleteAll />
       <p>{totalTasks} tasks</p>
-      <p>{incompleteTasks.length} uncompleted tasks</p>
+      <p>{uncompletedTasks} uncompleted tasks</p>
       {/* Buttons to switch form All Todos or by Categories */}
       <button onClick={showAllTodos}>Show All Todos</button>
       <button onClick={showByCategories}>Show By Categories</button>

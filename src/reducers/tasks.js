@@ -36,6 +36,7 @@ const todos = [
 const initialState = {
   todos,
   totalTasks: todos.length,
+  uncompletedTasks: todos.filter((todo) => !todo.checked).length,
   dueDate: null,
 };
 
@@ -57,10 +58,13 @@ export const tasks = createSlice({
       };
       state.todos.push(newTodo);
       state.totalTasks++;
+      state.uncompletedTasks++;
     },
     removeTask: (state, action) => {
       console.log("task deleted");
       state.todos = state.todos.filter((task) => task.id !== action.payload.id);
+      state.totalTasks--;
+      state.uncompletedTasks--;
     },
 
     // Toggle the completion state of a todo
@@ -68,16 +72,27 @@ export const tasks = createSlice({
       const task = state.todos.find((todo) => todo.id === action.payload.id);
       if (task) {
         task.checked = !task.checked;
+        if (task.checked) {
+          state.uncompletedTasks--;
+        } else {
+          state.uncompletedTasks++;
+        }
       }
     },
     completedAll: (state) => {
       console.log("completedAll Task");
-      state.todos = state.todos.map((task) => ({ ...task, complete: true }));
+      state.todos = state.todos.map((task) => ({
+        ...task,
+        complete: true,
+      }));
     },
     uncompletedAll: (state) => {
       console.log("uncompletedAll Task");
 
-      state.todos = state.todos.map((task) => ({ ...task, complete: false }));
+      state.todos = state.todos.map((task) => ({
+        ...task,
+        complete: false,
+      }));
     },
   },
 });
