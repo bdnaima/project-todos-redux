@@ -85,6 +85,8 @@ export const tasks = createSlice({
         ...task,
         complete: true,
       }));
+      state.totalTasks = 0;
+      state.uncompletedTasks = 0;
     },
     uncompletedAll: (state) => {
       console.log("uncompletedAll Task");
@@ -93,6 +95,8 @@ export const tasks = createSlice({
         ...task,
         complete: false,
       }));
+      state.totalTasks = state.todos.length;
+      state.uncompletedTasks = state.totalTasks;
     },
   },
 });
