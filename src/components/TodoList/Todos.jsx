@@ -36,12 +36,12 @@ const Todos = () => {
                 <li>
                   <input
                     type="checkbox"
-                    checked={list.complete}
+                    checked={list.checked}
                     onChange={() => handleToggleTodo(list.id)}
                   />
                   <span
                     style={{
-                      textDecoration: list.complete ? "line-through" : "none",
+                      textDecoration: list.checked ? "line-through" : "none",
                     }}
                   >
                     {list.text}

@@ -2,10 +2,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const todos = [
-  { id: 1, text: "Watch video on actions & reducers", complete: false },
-  { id: 2, text: "Follow redux codealong", complete: false },
-  { id: 3, text: "Fork weekly assignment", complete: false },
-  { id: 4, text: "Create a todo app", complete: false },
+  {
+    id: 1,
+    text: "Watch video on actions & reducers",
+    complete: false,
+    checked: false,
+  },
+  { id: 2, text: "Follow redux codealong", complete: false, checked: false },
+  { id: 3, text: "Fork weekly assignment", complete: false, checked: false },
+  { id: 4, text: "Create a todo app", complete: false, checked: false },
 ];
 
 const initialState = {
@@ -43,7 +48,7 @@ export const tasks = createSlice({
       const task = state.todos.find((todo) => todo.id === action.payload.id);
 
       if (task) {
-        task.complete = !task.complete;
+        task.checked = !task.checked;
       }
     },
   },
