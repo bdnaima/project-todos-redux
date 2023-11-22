@@ -1,5 +1,6 @@
 // src/reducers/tasks.js
 import { createSlice } from "@reduxjs/toolkit";
+import { format } from "date-fns";
 
 const todos = [
   {
@@ -16,6 +17,7 @@ const todos = [
 const initialState = {
   todos,
   totalTasks: todos.length,
+  dueDate: null
 };
 
 export const tasks = createSlice({
@@ -23,14 +25,19 @@ export const tasks = createSlice({
   initialState,
   reducers: {
     addTodo: (state, action) => {
-      const { text, category } = action.payload;
+      const { text, dueDate, category } = action.payload;
+      const currentTime = format(new Date(), "HH:mm dd/MM");
       const newTodo = {
-        id: (state.todos.length += 1),
+        id: state.todos.length + 1,
         text,
         category,
         complete: false,
+        dueDate,
+        createdAt: currentTime,
+
       };
       state.todos.push(newTodo);
+      state.totalTasks++;
     },
     removeTask: (state, action) => {
       console.log("task deleted");
@@ -45,16 +52,22 @@ export const tasks = createSlice({
       }
     },
     completedAll: (state) => {
-      console.log("completedAll Task");
+      console.log("completedAll Task")
       state.todos = state.todos.map((task) => ({ ...task, complete: true }));
+
     },
     uncompletedAll: (state) => {
-      console.log("uncompletedAll Task");
+      console.log("uncompletedAll Task")
+
       state.todos = state.todos.map((task) => ({ ...task, complete: false }));
-    },
+
+    }
+
+
   },
 });
 
-export const { removeTask, toggleTodo, completedAll, uncompletedAll } =
-  tasks.actions;
+
+export const { removeTask, toggleTodo,  completedAll, uncompletedAll, addTodo} = tasks.actions;
+
 export default tasks.reducer;
