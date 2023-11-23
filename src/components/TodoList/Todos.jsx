@@ -50,8 +50,8 @@ const Todos = () => {
       <p>{totalTasks} tasks</p>
       <p>{uncompletedTasks} uncompleted tasks</p>
       {/* Buttons to switch form All Todos or by Categories */}
-      <button onClick={showAllTodos}>Show All Todos</button>
-      <button onClick={showByCategories}>Show By Categories</button>
+      <button onClick={showAllTodos}>All Todos</button>
+      <button onClick={showByCategories}>Categories</button>
 
       {displayMode === "all" ? (
         <>
