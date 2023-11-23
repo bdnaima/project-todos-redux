@@ -7,6 +7,8 @@ import EmptyState from "../EmptyState/EmptyState";
 import CompleteAll from "../CompleteAll/CompleteAll";
 import Categories from "../Categories/Categories";
 import AddTodo from "../AddTodos";
+import NavBar from "../NavBar/NavBar";
+
 import styled from "styled-components";
 
 
@@ -70,6 +72,7 @@ cursor: pointer;
 }
 `;
 
+
 // Create function to extract categories
 const getCategories = (todoList) => {
   const categories = [];
@@ -108,6 +111,7 @@ const Todos = () => {
 
   return (
     <Container>
+     <NavBar />
       <AddTodo />
       <CompleteAll />
       <p>{totalTasks} tasks</p>
