@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
+const Select = styled.select`
+  width: 250px;
+  padding: 8px;
+  border-color: #ffaa43;
+  border-width: 2px;
+  margin-bottom: 16px;
+  color: #646464;
+`;
+
 const Dropdown = ({ newCategory, setNewCategory }) => {
-  const Select = styled.select`
-    width: 250px;
-    padding: 8px;
-    border-color: #ffaa43;
-    border-width: 2px;
-    margin-bottom: 16px;
-    color: #646464;
-  `;
   return (
     <Select
       value={newCategory}
