@@ -11,24 +11,46 @@ const Categories = ({ categories, todoList, handleToggle }) => {
           <h2>{category}</h2>
           <ul>
             {todoList
-              .filter((task) => task.category === category && !task.complete)
-              .map((task) => (
-                <li key={task.id}>
-                  <input
-                    type="checkbox"
-                    checked={task.complete}
-                    onChange={() => handleToggle(task.id)}
-                  />
-                  <span
-                    style={{
-                      textDecoration: task.complete ? "line-through" : "none",
-                    }}
-                  >
-                    {task.text}
-                  </span>
-                  <RemoveTask id={task.id} />
-                </li>
-              ))}
+              .filter((list) => list.category === category && !list.complete)
+              .map((list) => {
+                const now = new Date();
+                const taskDueDate = list.dueDate
+                  ? new Date(list.dueDate)
+                  : null;
+                const isOverdue = taskDueDate && taskDueDate < now;
+                return (
+                  <section key={list.id}>
+                    <ul>
+                      <li>
+                        <input
+                          type="checkbox"
+                          checked={list.checked}
+                          onChange={() => handleToggle(list.id)}
+                        />
+
+                        <span
+                          style={{
+                            textDecoration: list.checked
+                              ? "line-through"
+                              : "none",
+                            color: isOverdue ? "red" : "inherit",
+                          }}
+                        >
+                          {list.text}{" "}
+                          {list.dueDate && <span> {list.dueDate}</span>}
+                        </span>
+                        {/* Display timestamp */}
+                        {list.createdAt && (
+                          <p className="timestamp">
+                            Added at: {list.createdAt}
+                          </p>
+                        )}
+                      </li>
+                    </ul>
+                    <RemoveTask id={list.id} />
+                  </section>
+                );
+              })}
           </ul>
         </div>
       ))}
