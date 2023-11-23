@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { tasks } from "../reducers/tasks"
+import { tasks } from "../reducers/tasks";
 import { addTodo } from "../reducers/tasks";
 import { format } from "date-fns";
+import Dropdown from "./Dropdown/Dropdown";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -55,25 +56,31 @@ color: red;
 
 
 const AddTodo = () => {
-    const dispatch = useDispatch();
-    const [newTask, setNewTask] = useState("");
-    const [newCategory, setNewCategory] = useState("");
-    const [errorMsg, setErroMsg] = useState("");
-    const [date, setDate] = useState("");
+  const dispatch = useDispatch();
+  const [newTask, setNewTask] = useState("");
+  const [newCategory, setNewCategory] = useState("");
+  const [errorMsg, setErroMsg] = useState("");
+  const [date, setDate] = useState("");
 
-    const handleSubmitTodo = () => {
-        const currentTime = format(new Date(), "HH:mm dd/MM");
-        if (newTask && newCategory) {
-            dispatch(tasks.actions.addTodo({ text: newTask, dueDate: date, createdAt: currentTime, category: newCategory }));
-            setNewTask("");
-            setNewCategory("");
-            setDate("");
-        } else {
-            // Handle the case where either newTask or newCategory is empty
-            console.error("Please enter both task and category");
-            setErroMsg("Please enter both task and category");
-        }
-    };
+  const handleSubmitTodo = () => {
+    const currentTime = format(new Date(), "HH:mm dd/MM");
+    if (newTask && newCategory) {
+      dispatch(
+        tasks.actions.addTodo({
+          text: newTask,
+          dueDate: date,
+          createdAt: currentTime,
+          category: newCategory,
+        })
+      );
+      setNewTask("");
+      setNewCategory("");
+      setDate("");
+    } else {
+      // Handle the case where either newTask or newCategory is empty
+      setErroMsg("Please enter both task and category");
+    }
+  };
 
     return (
         <Container>
@@ -84,12 +91,7 @@ const AddTodo = () => {
                 value={newTask}
                 onChange={(event) => setNewTask(event.target.value)}
             />
-            <Input
-                type="text"
-                placeholder="Category"
-                value={newCategory}
-                onChange={(event) => setNewCategory(event.target.value)}
-            />
+            <Dropdown newCategory={newCategory} setNewCategory={setNewCategory} />
             <DateInput
                 type="date"
                 value={date}
