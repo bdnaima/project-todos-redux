@@ -33,7 +33,7 @@ import { format } from "date-fns";
 //   },
 // ];
 
-const todos = JSON.parse(localStorage.getItem("todos"));
+const todos = JSON.parse(localStorage.getItem("todos")) ?? [];
 
 const initialState = {
   todos,
