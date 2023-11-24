@@ -50,7 +50,7 @@ export const tasks = createSlice({
       const { text, dueDate, category } = action.payload;
       const currentTime = format(new Date(), "HH:mm dd/MM");
       const newTodo = {
-        id: state.todos.length + 1,
+        id: Date.now(),
         text,
         category,
         complete: false,
