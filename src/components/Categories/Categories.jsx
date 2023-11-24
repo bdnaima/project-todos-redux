@@ -5,6 +5,7 @@ import RemoveTask from "../RemoveTask/RemoveTask";
 import calendar from "../../assets/calendar_icon.png";
 import styled from "styled-components";
 import EmptyState from "../EmptyState/EmptyState";
+import SubTask from "../SubTask/SubTask";
 
 const TaskList = styled.section`
   margin-bottom: 30px;
@@ -149,6 +150,7 @@ const Categories = ({ categories, todoList, handleToggle }) => {
                         </ContentWrapper>
                         <RemoveTask id={list.id} />
                       </CheckboxAndText>
+                      <SubTask todoId={list.id}/>
                       {/* Display timestamp */}
                       {list.createdAt && (
                         <Timestamp>Added at: {list.createdAt}</Timestamp>

@@ -2,36 +2,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { format } from "date-fns";
 
-// const todos = [
-//   {
-//     id: 1,
-//     text: "Watch video on actions & reducers",
-//     complete: false,
-//     category: "Study",
-//     checked: false,
-//   },
-//   {
-//     id: 2,
-//     text: "Follow redux codealong",
-//     complete: false,
-//     category: "Study",
-//     checked: false,
-//   },
-//   {
-//     id: 3,
-//     text: "Fork weekly assignment",
-//     complete: false,
-//     category: "Work",
-//     checked: false,
-//   },
-//   {
-//     id: 4,
-//     text: "Create a todo app",
-//     complete: false,
-//     category: "Personal",
-//     checked: false,
-//   },
-// ];
 
 const todos = JSON.parse(localStorage.getItem("todos")) ?? [];
 
@@ -73,7 +43,7 @@ export const tasks = createSlice({
           todo.subtasks = [];
         }
         const newSubtask = {
-          id: todo.subtasks.length + 1,
+          id: Date.now(),
           subtext,
           complete: false,
         };
