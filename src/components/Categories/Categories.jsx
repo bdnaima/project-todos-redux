@@ -7,7 +7,8 @@ import styled from "styled-components";
 import EmptyState from "../EmptyState/EmptyState";
 
 const TaskList = styled.section`
-  margin-bottom: 60px;
+  margin-bottom: 30px;
+  margin-top: -1rem;
   border: solid 2px #dcdcdc;
   border-radius: 4px;
   display: flex;
@@ -84,6 +85,11 @@ const CategoryTab = styled.div`
   @media (max-width: 768px) {
     width: fit-content;
   }
+
+  @media (max-width: 280px) {
+    font-size: 10px;
+    top: -29px;
+  }
 `;
 
 const Categories = ({ categories, todoList, handleToggle }) => {
@@ -96,7 +102,10 @@ const Categories = ({ categories, todoList, handleToggle }) => {
         <EmptyState />
       ) : (
         categories.map((category, index) => (
-          <div key={index} style={{ position: "relative" }}>
+          <div
+            key={index}
+            style={{ position: "relative", marginBottom: "6rem" }}
+          >
             <ul style={{ paddingLeft: "0" }}>
               {todoList
                 .filter((list) => list.category === category && !list.complete)

@@ -154,89 +154,90 @@ const Todos = () => {
   };
 
   return (
-    <Container>
+    <>
       <NavBar />
-      <AddTodo />
+      <Container>
+        <AddTodo />
 
-      <CompleteAll />
-      <TaskParagraph>
-        <p>
-          {totalTasks} {totalTasks === 1 ? "task" : "tasks"}
-        </p>
-        <p>
-          {uncompletedTasks} uncompleted{" "}
-          {uncompletedTasks === 1 ? "task" : "tasks"}
-        </p>
-      </TaskParagraph>
+        <CompleteAll />
+        <TaskParagraph>
+          <p>
+            {uncompletedTasks} uncompleted{" "}
+            {uncompletedTasks === 1 ? "task" : "tasks"}
+          </p>
+          <p>Total tasks: {totalTasks}</p>
+        </TaskParagraph>
 
-      {/* Buttons to switch form All Todos or by Categories */}
-      <Button onClick={showAllTodos}>All Todos</Button>
-      <Button onClick={showByCategories}>Categories</Button>
+        {/* Buttons to switch form All Todos or by Categories */}
 
-      {displayMode === "all" ? (
-        <>
-          {incompleteTasks.length === 0 ? (
-            <EmptyState />
-          ) : (
-            <>
-              {incompleteTasks.map((list) => {
-                const now = new Date();
-                const taskDueDate = list.dueDate
-                  ? new Date(list.dueDate)
-                  : null;
-                const isOverdue = taskDueDate && taskDueDate < now;
-                return (
-                  <TaskList key={list.id}>
-                    <CheckboxAndText>
-                      <ContentWrapper>
-                        <DisplayTask>
-                          <Checkbox
-                            className="checkbox-round"
-                            type="checkbox"
-                            checked={list.checked}
-                            onChange={() => handleToggle(list.id)}
-                          />
-                          <TaskText checked={list.checked}>
-                            {list.text}
-                          </TaskText>
-                        </DisplayTask>
-                        <DueDate
-                          style={{
-                            textDecoration: list.checked
-                              ? "line-through"
-                              : "none",
-                            color: isOverdue ? "red" : "inherit",
-                          }}
-                        >
-                          <img
-                            src={calendar}
-                            alt="calendar"
-                            style={{ marginRight: "10px" }}
-                          />
-                          {list.dueDate && <span> {list.dueDate}</span>}
-                        </DueDate>
-                      </ContentWrapper>
-                      <RemoveTask id={list.id} />
-                    </CheckboxAndText>
-                    {/* Display timestamp */}
-                    {list.createdAt && (
-                      <Timestamp>Added at: {list.createdAt}</Timestamp>
-                    )}
-                  </TaskList>
-                );
-              })}
-            </>
-          )}
-        </>
-      ) : (
-        // Display todos by categories
-        <Categories
-          categories={categories}
-          todoList={todoList}
-          handleToggle={handleToggle}
-        />
-      )}
-    </Container>
+        <Button onClick={showAllTodos}>All Todos</Button>
+        <Button onClick={showByCategories}>Categories</Button>
+
+        {displayMode === "all" ? (
+          <>
+            {incompleteTasks.length === 0 ? (
+              <EmptyState />
+            ) : (
+              <>
+                {incompleteTasks.map((list) => {
+                  const now = new Date();
+                  const taskDueDate = list.dueDate
+                    ? new Date(list.dueDate)
+                    : null;
+                  const isOverdue = taskDueDate && taskDueDate < now;
+                  return (
+                    <TaskList key={list.id}>
+                      <CheckboxAndText>
+                        <ContentWrapper>
+                          <DisplayTask>
+                            <Checkbox
+                              className="checkbox-round"
+                              type="checkbox"
+                              checked={list.checked}
+                              onChange={() => handleToggle(list.id)}
+                            />
+                            <TaskText checked={list.checked}>
+                              {list.text}
+                            </TaskText>
+                          </DisplayTask>
+                          <DueDate
+                            style={{
+                              textDecoration: list.checked
+                                ? "line-through"
+                                : "none",
+                              color: isOverdue ? "red" : "inherit",
+                            }}
+                          >
+                            <img
+                              src={calendar}
+                              alt="calendar"
+                              style={{ marginRight: "10px" }}
+                            />
+                            {list.dueDate && <span> {list.dueDate}</span>}
+                          </DueDate>
+                        </ContentWrapper>
+                        <RemoveTask id={list.id} />
+                      </CheckboxAndText>
+                      {/* Display timestamp */}
+                      {list.createdAt && (
+                        <Timestamp>Added at: {list.createdAt}</Timestamp>
+                      )}
+                    </TaskList>
+                  );
+                })}
+              </>
+            )}
+          </>
+        ) : (
+          // Display todos by categories
+          <Categories
+            categories={categories}
+            todoList={todoList}
+            handleToggle={handleToggle}
+          />
+        )}
+      </Container>
+    </>
   );
 };
 
