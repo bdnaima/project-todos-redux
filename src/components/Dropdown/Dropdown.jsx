@@ -1,6 +1,17 @@
+import styled from "styled-components";
+
+const Select = styled.select`
+  width: 250px;
+  padding: 8px;
+  border-color: #ffaa43;
+  border-width: 2px;
+  margin-bottom: 16px;
+  color: #646464;
+`;
+
 const Dropdown = ({ newCategory, setNewCategory }) => {
   return (
-    <select
+    <Select
       value={newCategory}
       onChange={(e) => setNewCategory(e.target.value)}
     >
@@ -10,7 +21,7 @@ const Dropdown = ({ newCategory, setNewCategory }) => {
       <option value="Cleaning">Cleaning</option>
       <option value="Cooking">Cooking</option>
       <option value="Other">Other</option>
-    </select>
+    </Select>
   );
 };
 
