@@ -10,6 +10,7 @@ import AddTodo from "../AddTodos";
 import NavBar from "../NavBar/NavBar";
 
 import styled from "styled-components";
+import SubTask from "../SubTask/SubTask";
 
 
 const Container = styled.div`
@@ -146,7 +147,6 @@ const Todos = () => {
                         <TaskText checked={list.checked}>
                           {list.text}
                         </TaskText>
-
                         <DueDate style={{
                           textDecoration: list.checked
                             ? "line-through"
@@ -158,6 +158,7 @@ const Todos = () => {
                       </ContentWrapper>
                       <RemoveTask id={list.id} />
                     </CheckboxAndText>
+                    <SubTask todoId={list.id}/>
                     {/* Display timestamp */}
                     {list.createdAt && (
                       <Timestamp>Added at: {list.createdAt}</Timestamp>
