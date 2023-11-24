@@ -57,12 +57,29 @@ export const tasks = createSlice({
         checked: false,
         dueDate,
         createdAt: currentTime,
+        subtasks: [],
       };
       state.todos.push(newTodo);
       state.totalTasks++;
       state.uncompletedTasks++;
 
       localStorage.setItem("todos", JSON.stringify(state.todos));
+    },
+    addSubtask: (state, action) => {
+      const { todoId, subtext } = action.payload;
+      const todo = state.todos.find((todo) => todo.id === todoId);
+      if (todo) {
+        if (!todo.subtasks) {
+          todo.subtasks = [];
+        }
+        const newSubtask = {
+          id: todo.subtasks.length + 1,
+          subtext,
+          complete: false,
+        };
+        todo.subtasks.push(newSubtask);
+        localStorage.setItem("todos", JSON.stringify(state.todos));
+      }
     },
     removeTask: (state, action) => {
       console.log("task deleted");
@@ -78,7 +95,7 @@ export const tasks = createSlice({
       const task = state.todos.find((todo) => todo.id === action.payload.id);
       if (task) {
         task.checked = !task.checked;
-        if (task.checked) {
+        if (task.checked ) {
           state.uncompletedTasks--;
         } else {
           state.uncompletedTasks++;
@@ -86,6 +103,34 @@ export const tasks = createSlice({
       }
       localStorage.setItem("todos", JSON.stringify(state.todos));
     },
+
+    toggleSubtask: (state, action) => {
+      const { todoId, subtaskId } = action.payload;
+      const todo = state.todos.find((todo) => todo.id === todoId);
+      
+      if (todo) {
+        const subtask = todo.subtasks.find((subtask) => subtask.id === subtaskId);
+    
+        if (subtask) {
+          subtask.complete = !subtask.complete;
+    
+          // Update the corresponding todo's checked property based on subtasks
+          todo.checked = todo.subtasks.every((subtask) => subtask.complete);
+
+        }
+        //toggle uncompleted when all subtask is checked
+        // if (todo.checked && subtask.complete) {
+        //   if (todo.checked && subtask.complete ) {
+        //     state.uncompletedTasks--;
+        //   } else {
+        //     state.uncompletedTasks++;
+        //   }
+        // }
+
+      }
+      localStorage.setItem("todos", JSON.stringify(state.todos));
+    },
+    
     completedAll: (state) => {
       console.log("completedAll Task");
       state.todos = state.todos.map((task) => ({
@@ -112,7 +157,7 @@ export const tasks = createSlice({
   },
 });
 
-export const { removeTask, toggleTodo, completedAll, uncompletedAll, addTodo } =
+export const { removeTask, toggleTodo, completedAll, uncompletedAll, addTodo, addSubtask, toggleSubtask } =
   tasks.actions;
 
 export default tasks.reducer;

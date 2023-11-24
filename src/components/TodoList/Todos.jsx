@@ -11,6 +11,7 @@ import NavBar from "../NavBar/NavBar";
 import calendar from "../../assets/calendar_icon.png";
 
 import styled from "styled-components";
+import SubTask from "../SubTask/SubTask";
 
 const Container = styled.div`
   padding: 20px;
@@ -218,6 +219,7 @@ const Todos = () => {
                         </ContentWrapper>
                         <RemoveTask id={list.id} />
                       </CheckboxAndText>
+                       <SubTask todoId={list.id}/>
                       {/* Display timestamp */}
                       {list.createdAt && (
                         <Timestamp>Added at: {list.createdAt}</Timestamp>
