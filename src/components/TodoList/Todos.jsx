@@ -1,11 +1,13 @@
 // Todos.js
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTodo } from "../../reducers/tasks";
+import { sortTasksByRecent } from "../../reducers/tasks";
 import RemoveTask from "../RemoveTask/RemoveTask";
 import EmptyState from "../EmptyState/EmptyState";
 import CompleteAll from "../CompleteAll/CompleteAll";
 import Categories from "../Categories/Categories";
+import FilterRecent from "../FilterRecent/FilterRecent"
 import AddTodo from "../AddTodos";
 import NavBar from "../NavBar/NavBar";
 
@@ -86,6 +88,8 @@ const getCategories = (todoList) => {
 
 
 
+
+
 const Todos = () => {
   const todoList = useSelector((state) => state.tasks.todos);
   const incompleteTasks = todoList.filter((task) => !task.complete);
@@ -94,6 +98,7 @@ const Todos = () => {
 
   const categories = getCategories(todoList);
   const [displayMode, setDisplayMode] = useState("all");
+  // const [filterRecent, setFilterRecent] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -109,9 +114,18 @@ const Todos = () => {
     setDisplayMode("categories");
   };
 
+  const showByRecent = () => {
+    setDisplayMode("recent");
+  };
+
+
+  // useEffect(() => {
+  //   dispatch(sortTasksByRecent()); // Trigger sorting when todoList changes
+  // }, [dispatch, todoList]);
+
   return (
     <Container>
-     <NavBar />
+      <NavBar />
       <AddTodo />
       <CompleteAll />
       <p>{totalTasks} tasks</p>
@@ -119,9 +133,10 @@ const Todos = () => {
       {/* Buttons to switch form All Todos or by Categories */}
       <Button onClick={showAllTodos}>All Todos</Button>
       <Button onClick={showByCategories}>Categories</Button>
+      <Button onClick={showByRecent}>Recent</Button>
 
 
-      {displayMode === "all" ? (
+      {displayMode === "all" && (
         <>
           {incompleteTasks.length === 0 ? (
             <EmptyState />
@@ -168,11 +183,19 @@ const Todos = () => {
             </>
           )}
         </>
-      ) : (
+      )}
+      {displayMode === "categories" && (
         // Display todos by categories
         <Categories
           categories={categories}
           todoList={todoList}
+          handleToggle={handleToggle}
+        />
+      )}
+      {displayMode === "recent" && (
+        <FilterRecent
+          todoList={incompleteTasks}
+          sortFunction={sortTodosByRecent}
           handleToggle={handleToggle}
         />
       )}
