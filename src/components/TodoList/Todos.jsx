@@ -1,5 +1,5 @@
 // Todos.js
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTodo } from "../../reducers/tasks";
 import RemoveTask from "../RemoveTask/RemoveTask";
@@ -140,7 +140,6 @@ const Todos = () => {
 
   const categories = getCategories(todoList);
   const [displayMode, setDisplayMode] = useState("all");
-  // const [filterRecent, setFilterRecent] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -175,8 +174,7 @@ const Todos = () => {
           <p>Total tasks: {totalTasks}</p>
         </TaskParagraph>
 
-        {/* Buttons to switch form All Todos or by Categories */}
-
+        {/* Buttons to switch form All Todos, Categories or Due Date */}
         <Button onClick={showAllTodos}>All Todos</Button>
         <Button onClick={showByCategories}>Categories</Button>
         <Button onClick={showByDueDate}>Due Date</Button>
