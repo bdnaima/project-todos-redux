@@ -25,6 +25,23 @@ const EmptyStateContainer = styled.section`
   p:last-child {
     color: #666;
   }
+
+  @media (max-width: 768px) {
+    margin: 1rem 2rem 0 2rem;
+
+    p {
+      font-size: 18px;
+    }
+
+    h3 {
+      font-size: 20px;
+    }
+  }
+
+  @media (min-width: 769px) {
+    margin: 1rem 20%;
+  }
+ 
 `;
 const EmptyState = () => {
   return (
