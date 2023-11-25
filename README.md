@@ -1,21 +1,19 @@
-# Technigo React Starter App
+# Todo App 📋
 
-## Usage
+Code buddies  Priya Pradhan👩🏻‍💻, Sarah Östehed 👩🏻‍💻, and Naima Malik 👩🏻‍💻 Technigo Group Project Week 9 - Nov 20th to Nov 26th 2023
 
-1. Fork and clone this repository to your computer
-2. Install required dependencies with npm: `npm install`
-3. Start the project: `npm run dev`
+This Todo app is packed with great features:
 
-# Project Todos
+- User can add and delete there todo list giving categories and due date.
+- User can add subtask and marked as completed.
+- Todo can be sorted based on categories, due dates and all of the todo list.
+- All of the todos can be marked completed.
+- User can see counts of total tasks and uncompleted task.
 
-Replace this readme with your own information about your project.
 
-Start by briefly describing the assignment in a sentence or two. Keep it short and to the point.
 
-## The problem
+Tech used: Trello, Slack and Discord.
 
-Describe how you approached to problem, and what tools and techniques you used to solve it. How did you plan? What technologies did you use? If you had more time, what would be next?
+View it live
+ https://todo-app-by-naima-sarah-priya.netlify.app
 
-## View it live
-
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
