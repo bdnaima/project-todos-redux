@@ -60,12 +60,6 @@ export const tasks = createSlice({
       localStorage.setItem("todos", JSON.stringify(state.todos));
     },
 
-    sortTodosByRecent: (state) => {
-      state.todos = state.todos.slice().sort((a, b) => {
-        return new Date(b.createdAt) - new Date(a.createdAt);
-      });
-    },
-
     // Toggle the completion state of a todo
     toggleTodo: (state, action) => {
       const task = state.todos.find((todo) => todo.id === action.payload.id);
@@ -133,7 +127,7 @@ export const tasks = createSlice({
   },
 });
 
-export const { removeTask, toggleTodo, completedAll, uncompletedAll, addTodo, sortTasksByRecent, toggleSubtask, addSubtask } =
+export const { removeTask, toggleTodo, completedAll, uncompletedAll, addTodo, toggleSubtask, addSubtask } =
   tasks.actions;
 
 export default tasks.reducer;

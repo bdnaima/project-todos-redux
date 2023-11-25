@@ -2,18 +2,18 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTodo } from "../../reducers/tasks";
-import { sortTasksByRecent } from "../../reducers/tasks";
 import RemoveTask from "../RemoveTask/RemoveTask";
 import EmptyState from "../EmptyState/EmptyState";
 import CompleteAll from "../CompleteAll/CompleteAll";
 import Categories from "../Categories/Categories";
-import FilterRecent from "../FilterRecent/FilterRecent"
+import SortByDueDate from "../SortByDueDate/SortByDueDate";
 import AddTodo from "../AddTodos";
 import NavBar from "../NavBar/NavBar";
 import calendar from "../../assets/calendar_icon.png";
 
 import styled from "styled-components";
 import SubTask from "../SubTask/SubTask";
+
 
 const Container = styled.div`
   padding: 20px;
@@ -156,14 +156,9 @@ const Todos = () => {
     setDisplayMode("categories");
   };
 
-  const showByRecent = () => {
-    setDisplayMode("recent");
+  const showByDueDate = () => {
+    setDisplayMode("due date");
   };
-
-
-  // useEffect(() => {
-  //   dispatch(sortTasksByRecent()); // Trigger sorting when todoList changes
-  // }, [dispatch, todoList]);
 
   return (
 
@@ -184,7 +179,7 @@ const Todos = () => {
 
         <Button onClick={showAllTodos}>All Todos</Button>
         <Button onClick={showByCategories}>Categories</Button>
-        <Button onClick={showByRecent}>Recent</Button>
+        <Button onClick={showByDueDate}>Due Date</Button>
 
         {displayMode === "all" && (
           <>
@@ -251,10 +246,8 @@ const Todos = () => {
             handleToggle={handleToggle}
           />
         )}
-        {displayMode === "recent" && (
-          <FilterRecent
-            todoList={incompleteTasks}
-            sortFunction={sortTodosByRecent}
+        {displayMode === "due date" && (
+          <SortByDueDate
             handleToggle={handleToggle}
           />
         )}
