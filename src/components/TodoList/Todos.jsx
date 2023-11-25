@@ -6,12 +6,14 @@ import RemoveTask from "../RemoveTask/RemoveTask";
 import EmptyState from "../EmptyState/EmptyState";
 import CompleteAll from "../CompleteAll/CompleteAll";
 import Categories from "../Categories/Categories";
+import SortByDueDate from "../SortByDueDate/SortByDueDate";
 import AddTodo from "../AddTodos";
 import NavBar from "../NavBar/NavBar";
 import calendar from "../../assets/calendar_icon.png";
 
 import styled from "styled-components";
 import SubTask from "../SubTask/SubTask";
+
 
 const Container = styled.div`
   padding: 20px;
@@ -130,7 +132,6 @@ const getCategories = (todoList) => {
   });
   return categories;
 };
-
 const Todos = () => {
   const todoList = useSelector((state) => state.tasks.todos);
   const incompleteTasks = todoList.filter((task) => !task.complete);
@@ -154,7 +155,12 @@ const Todos = () => {
     setDisplayMode("categories");
   };
 
+  const showByDueDate = () => {
+    setDisplayMode("due date");
+  };
+
   return (
+
     <>
       <NavBar />
       <Container>
@@ -168,12 +174,12 @@ const Todos = () => {
           <p>Total tasks: {totalTasks}</p>
         </TaskParagraph>
 
-        {/* Buttons to switch form All Todos or by Categories */}
-
+        {/* Buttons to switch form All Todos, Categories or Due Date */}
         <Button onClick={showAllTodos}>All Todos</Button>
         <Button onClick={showByCategories}>Categories</Button>
+        <Button onClick={showByDueDate}>Due Date</Button>
 
-        {displayMode === "all" ? (
+        {displayMode === "all" && (
           <>
             {incompleteTasks.length === 0 ? (
               <EmptyState />
@@ -218,7 +224,7 @@ const Todos = () => {
                         </ContentWrapper>
                         <RemoveTask id={list.id} />
                       </CheckboxAndText>
-                       <SubTask todoId={list.id}/>
+                      <SubTask todoId={list.id} />
                       {/* Display timestamp */}
                       {list.createdAt && (
                         <Timestamp>Added at: {list.createdAt}</Timestamp>
@@ -229,11 +235,17 @@ const Todos = () => {
               </>
             )}
           </>
-        ) : (
+        )}
+        {displayMode === "categories" && (
           // Display todos by categories
           <Categories
             categories={categories}
             todoList={todoList}
+            handleToggle={handleToggle}
+          />
+        )}
+        {displayMode === "due date" && (
+          <SortByDueDate
             handleToggle={handleToggle}
           />
         )}

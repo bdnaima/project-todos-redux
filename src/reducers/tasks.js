@@ -65,7 +65,7 @@ export const tasks = createSlice({
       const task = state.todos.find((todo) => todo.id === action.payload.id);
       if (task) {
         task.checked = !task.checked;
-        if (task.checked ) {
+        if (task.checked) {
           state.uncompletedTasks--;
         } else {
           state.uncompletedTasks++;
@@ -77,13 +77,13 @@ export const tasks = createSlice({
     toggleSubtask: (state, action) => {
       const { todoId, subtaskId } = action.payload;
       const todo = state.todos.find((todo) => todo.id === todoId);
-      
+
       if (todo) {
         const subtask = todo.subtasks.find((subtask) => subtask.id === subtaskId);
-    
+
         if (subtask) {
           subtask.complete = !subtask.complete;
-    
+
           // Update the corresponding todo's checked property based on subtasks
           todo.checked = todo.subtasks.every((subtask) => subtask.complete);
 
@@ -100,7 +100,7 @@ export const tasks = createSlice({
       }
       localStorage.setItem("todos", JSON.stringify(state.todos));
     },
-    
+
     completedAll: (state) => {
       console.log("completedAll Task");
       state.todos = state.todos.map((task) => ({
@@ -127,7 +127,7 @@ export const tasks = createSlice({
   },
 });
 
-export const { removeTask, toggleTodo, completedAll, uncompletedAll, addTodo, addSubtask, toggleSubtask } =
+export const { removeTask, toggleTodo, completedAll, uncompletedAll, addTodo, toggleSubtask, addSubtask } =
   tasks.actions;
 
 export default tasks.reducer;
