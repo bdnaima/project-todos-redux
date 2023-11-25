@@ -159,7 +159,6 @@ const Todos = () => {
       <NavBar />
       <Container>
         <AddTodo />
-
         <CompleteAll />
         <TaskParagraph>
           <p>
